@@ -1,0 +1,48 @@
+$def with (page)
+$var css: /static/css/bootstrap.min.css?v=v5.3.3 /static/css/mdb.min.css /static/css/all.min.css
+$var js: /static/js/jquery.js /static/js/bootstrap.min.js /static/js/isotope.pkgd.min.js /static/js/mdb.umd.min.js /static/js/ripples.js https://kit.fontawesome.com/766ccf8039.js /static/js/scripty.js
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeWizard</title>
+        $if self.css:
+            $for style in self.css.split():
+                <link rel="stylesheet" href=$style>
+
+</head>
+<body>
+    <div id="app" class="container-fluid bg-secondary-subtle" style="height:100%; overflow-y: auto;">
+        <nav class="navbar fixed-top bg-info navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+
+                    <a class="navbar-brand text-white">CodeWizard</a>
+                    <div class="collapse navbar-collapse">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item"><a class="nav-link active text-white" href="/">Home Feed<div class="ripple-container"></div></a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/discover">Discover<div class="ripple-container"></div></a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/profile">Profile<div class="ripple-container"></div></a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/settings">Settings<div class="ripple-container"></div></a></li>
+                </ul>
+                    </div>
+                    <div class="pull-right">
+                        $if session["user"] == None:
+                            <a href="/login" class="btn btn-link waves-effect">Login</a>&nbsp;
+                            <a href="/register" class="btn btn-raised btn-light waves-effect">Register</a>&nbsp;&nbsp;
+                        $else:
+                            <a id="logout-link" class="btn btn=raised btn-light waves-effect">Logout</a>&nbsp; &nbsp;
+                    </div>
+            </div>
+        </nav>
+
+        <br /><br /><br />
+        $:page
+    </div>
+
+    $if self.js:
+        $for script in self.js.split():
+            <script type="module" src=$script></script>
+
+
+</body>
+</html>

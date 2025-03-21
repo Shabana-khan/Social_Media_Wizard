@@ -1,0 +1,87 @@
+$def with (info_page, info_form, user_info)
+
+<body>
+    <div class="row">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="card text-bg-dark">
+
+                        <img src="$user_info['background']" class="card-img" style="height:300px" alt="Primary Image" onerror="this.onerror=null; this.src='/static/images/Beach.jpg';">
+                        <div class="card-img-overlay">
+                            <img src="$user_info['avatar']" class="rounded-circle position-absolute top-50 start-50 translate-middle border border-white border-5" style="width:100px; height:100px" onerror="this.onerror=null; this.src='/static/images/shabana.jpg';">
+                            <p class="card-text position-absolute bottom-0 start-50 translate-middle text-center">$user_info["name"] <br> Freelancer</p>
+
+                        </div>
+                    </div>
+                </div>
+                $if info_form == False:
+                    <div class="card-footer text-body-secondary">
+
+                        <ul class="nav nav-tabs card-header-tabs">
+                          <li class="nav-item">
+                            <a class="nav-link active profile-item" type="button" aria-current="true" data-tab-id="activity" href="/profile/$user_info['username']/activity">Activity</a>
+
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link profile-item" type="button" data-tab-id="info" href="/profile/$user_info['username']/info">Info</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link profile-item" type="button" data-tab-id="code" href="/profile/$user_info['username']/code">Code</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link profile-item" type="button" data-tab-id="code">Contact</a>
+                          </li>
+                        </ul>
+                    </div>
+            </div>
+            <div>
+                $:info_page
+            </div>
+        </div>
+    </div>
+
+    <script>
+           // Get all the tab elements
+    const tabs = document.querySelectorAll('.profile-item');
+
+    function changeTab(){
+        const path = window.location.pathname;
+         const pathSegments = path.split('/').filter(segment => segment !== '');
+         console.log(pathSegments[2]); // Match the /tab/ID in URL
+
+        if (pathSegments[2]) {
+            // Update the content for the selected tab based on the URL
+            tabs.forEach(t => t.classList.remove('active'));
+            const tabId = pathSegments[2];
+            let element = null;
+            if(tabId == "activity"){
+                console.log(element)
+                element = document.querySelector(`[data-tab-id="activity"]`);
+            }else if(tabId == "info"){
+                console.log(element)
+                element = document.querySelector(`[data-tab-id="info"]`);
+            }else if(tabId == "code"){
+                console.log(element)
+                element = document.querySelector(`[data-tab-id="code"]`);
+            }else if(tabId == "contact"){
+                element = document.querySelector(`[data-tab-id="contact"]`);
+            }
+            if(element){
+                console.log(element)
+                element.classList.add('active')
+                console.log(element.classList)
+            }
+
+        }
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Your code here will run when the DOM is fully loaded
+        console.log('Document is ready!');
+         changeTab();
+    });
+    </script>
+</body>

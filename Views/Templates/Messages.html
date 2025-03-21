@@ -1,0 +1,117 @@
+$def with (posts)
+<head>
+    <style>
+     * { box-sizing: border-box; }
+
+    /* force scrollbar, prevents initial gap */
+    html {
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: sans-serif;
+    }
+
+    /* ---- grid ---- */
+    .grid {
+      max-width: 1200px;
+    }
+
+    /* clear fix */
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    /* ---- .element-item ---- */
+
+    /* 2 columns, percentage width */
+    .grid-item,
+    .grid-sizer {
+      width: 50%;
+    }
+
+    .grid-item {
+      float: left;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .grid-item--width2 { width: 45%; margin-right: 10px;}
+    .grid-item--height2 { height: 200px; }
+
+
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="grid-sizer"></div>
+        <form id="post-activity" style="position: relative;" class="grid-item grid-item--width2">
+            <textarea name="content" class="form-control" rows="8" placeholder="What's new, $session['user']['name']?"></textarea>
+            <button id="post-button" class="btn btn-info" style="position: absolute; bottom: 10px; right: 10px;" type="submit">
+                <i class="fas fa-paper-plane"></i><span class="mx-2">Post</span>
+            </button>
+        </form>
+        $if posts:
+            $for post in posts:
+                    <div class="card grid-item grid-item--width2">
+                      <div class="card-body">
+                          <div class="d-flex flex-column mb-3">
+                              <h5 class="card-title">
+
+                                    <a class="d-flex flex-lg-row flex-md-row flex-sm-column mb-3" href="/profile/${post['user']['username']}">
+                                      <div class="pt-2"><i class="fas fa-circle-user fa-2x"></i></div>
+                                      <div class="p-2"><span>$post['user']['name']</span><br><p class="text-body-secondary pt-2" style="font-size: 13px;">Posted $post['timestamp']</p></div>
+
+                                    </a>
+
+                              </h5>
+                              <div class="card-text pb-4">$post['content']</div>
+                              <div class="footer">
+                                        <button class="btn btn-secondary btn-lg btn-floating btn-like" data-mdb-ripple-init><i class="fas fa-thumbs-up fa-lg"></i></button>
+                                        <button class="btn btn-secondary btn-lg btn-floating btn-like" data-mdb-ripple-init><i class="far fa-comment-dots fa-lg"></i></button>
+                                        <button class="btn btn-secondary btn-lg btn-floating btn-like" data-mdb-ripple-init><i class="fas fa-share fa-lg"></i></button>
+
+                              </div>
+                          </div>
+
+                      </div>
+                      <div class="card-body text-bg-light border-dark border-2">
+                      $for comment in post["comments"]:
+                          <div class="d-flex flex-column mb-3">
+                              <h5 class="card-title">
+
+                                    <a class="d-flex flex-lg-row flex-md-row flex-sm-column mb-3" href="/profile/${comment['user']['username']}">
+
+                                      <div class="pt-2"><i class="fas fa-circle-user fa-2x"></i></div>
+                                      <div class="p-2"><span>$comment['user']['name']</span><br><p class="text-body-secondary pt-2" style="font-size: 13px;">Posted $comment['timestamp']</p></div>
+
+                                    </a>
+
+                              </h5>
+                              <div class="card-text">$comment['comment_text']</div>
+                          </div>
+                          <hr class="w-80 mx-auto border">
+                      <h5 class="card-title">
+
+                                    <div class="d-flex flex-lg-row flex-md-row flex-sm-column mb-3">
+                                      <div class="pt-2 pe-2"><i class="fas fa-circle-user fa-2x"></i></div>
+                                      <form id="comment-form" style="width:100%;">
+                                       <input name="post_id" type="hidden" value=$post['_id']>
+                                       <textarea name="comment_text" class="form-control" style="border: 0; border-bottom: 2px solid #d3d3d3;" placeholder="Write a comment"></textarea>
+                                       <div class="text-end mt-1">
+                                           <button type="submit" class="btn btn-info btn-raised waves-effect btn-sm">Add Comment</button>
+                                       </div>
+                                      </form>
+                                    </div>
+
+                      </h5>
+
+                      </div>
+                    </div>
+
+
+    </div>
+
+</body>

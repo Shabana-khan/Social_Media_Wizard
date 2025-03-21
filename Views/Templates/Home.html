@@ -1,0 +1,27 @@
+$def with (message_page)
+<div>
+    $if session["user"] is not None:
+        <div class="row h-50">
+            <div class="col-2 justify-content-start">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link link-info active" href="/"><i class="fa-solid fa-house"></i>  Home Feed</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/profile/$session['user']['username']"><i class="fas fa-circle-user"></i>  Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/messages/$session['user']['username']"><i class="fas fa-envelope"></i>  Messages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-group"></i>  Friends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-users"></i>  Communities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-bell"></i>  Notifications</a></li>
+                    <hr class="hr w-25" />
+                    <li class="nav-item"><a class="nav-link" href="/settings/$session['user']['username']"><i class="fas fa-gear"></i>  Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-circle-question"></i>  Help</a></li>
+                </ul>
+            </div>
+
+            <div class="col-10">
+                $:message_page
+            </div>
+        </div>
+    $else:
+            <div class="col-10">
+                $:message_page
+            </div>
+</div>

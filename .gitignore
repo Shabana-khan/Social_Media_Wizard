@@ -1,0 +1,12 @@
+# Ignore Virtual Environments
+venv/
+.env
+__pycache__/
+
+# Ignore PyCharm settings
+.idea/
+
+# Ignore database dumps
+*.bson
+*.json
+*.log
