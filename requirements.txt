@@ -1,9 +1,5 @@
-bcrypt==4.3.0
-cheroot==10.0.1
-dnspython==2.7.0
-humanize==4.12.1
-jaraco.functools==4.1.0
-more-itertools==10.6.0
-pymongo==4.11.3
-python-dotenv==1.0.1
-web.py==0.62
+humanize~=4.12.1
+pymongo~=4.11.3
+bcrypt~=4.3.0
+python-dotenv~=1.0.1
+web.py~=0.62
