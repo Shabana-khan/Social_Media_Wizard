@@ -13,15 +13,15 @@
    cd <project-directory>
    
 2. Run the following commands:
-   # Create Virtual Environment
+   ### Create Virtual Environment
    python -m venv venv
 
-   # To cativate the above vitual env
+   ### To cativate the above vitual env
    Windows: venv\Scripts\activate
    Mac/Linux: source venv/bin/activate
 
-   # Install dependencies
+   ### Install dependencies
    pip install -r requirements.txt
 
-   # Run the project
+   ### Run the project
    python controller.py
