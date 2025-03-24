@@ -23,5 +23,12 @@
    ### Install dependencies
    pip install -r requirements.txt
 
-   ### Run the project
+3. Install MongoDB
+   mongod --dbpath "C:\data\db"  # Windows
+   sudo systemctl start mongod   # Linux/macOS
+
+4. Add a .env File to the project directory
+   MONGO_URI=mongodb://localhost:27017/mydatabase
+
+5. Run the project
    python controller.py
